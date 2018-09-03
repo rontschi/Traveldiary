@@ -12,36 +12,42 @@
         android:layout_marginTop="30dp"
         android:text="@string/text_diary"
         android:textSize="19dp"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="#283593"
         android:textStyle="bold"/>
 
 
     <EditText
+        android:id="@+id/edit_date_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="75dp"
-        android:hint="@string/edit_date"/>
+        android:hint="@string/edit_date"
+        android:inputType="date"/>
 
     <EditText
+        android:id="@+id/edit_place_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="115dp"
-        android:hint="@string/edit_place"/>
+        android:hint="@string/edit_place"
+        android:inputType="text"/>
 
     <EditText
+        android:id="@+id/edit_entry_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="190dp"
-        android:hint="@string/edit_diary"/>
+        android:hint="@string/edit_diary"
+        android:inputType="text"/>
     
     <Button
         android:id="@+id/button_diary"
@@ -53,7 +59,7 @@
         android:layout_marginBottom="70dp"
         android:layout_marginEnd="50dp"
         android:layout_marginRight="50dp"
-        android:background="@android:color/holo_orange_light"
+        android:background="#ffa000"
         android:text="@string/text_button_diary"
         android:textColor="@android:color/white"
         android:textSize="17dp" />
