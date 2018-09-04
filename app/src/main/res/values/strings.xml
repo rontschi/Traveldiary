@@ -5,11 +5,14 @@
     <string name="text_button_entry">NEUER EINTRAG</string>
     <string name="text_button_diary">SPEICHERN</string>
     <string name="text_diary">TAGEBUCH</string>
-    <string name="edit_date">Datum (T.M.J)</string>
+    <string name="edit_date">Datum (TT.MM.JJ)</string>
     <string name="edit_place">Ort</string>
     <string name="edit_diary">Heute war ein wunderschöner Tag, da...</string>
     <string name="text_map">KARTE</string>
-    <string name="action_settings">Menü</string>
+    <string name="action_settings">Einträge</string>
     <string name="text_header">TAGEBUCHEINTRAG</string>
+    <string name="cab_delete">Einträge löschen</string>
+    <string name="editText_errorMessage">Eingabe erforderlich.</string>
+    <string name="map_settings">Map</string>
 </resources>
 

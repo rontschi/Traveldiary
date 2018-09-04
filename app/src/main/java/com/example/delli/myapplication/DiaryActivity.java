@@ -3,6 +3,7 @@ package com.example.delli.myapplication;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -41,7 +42,7 @@ public class DiaryActivity extends AppCompatActivity {
     }
 
 
-    private DiaryMemo saveEntry(){
+    private void saveEntry(){
 
         EditText newDate = (EditText)findViewById(R.id.edit_date_id);
         EditText newPlace = (EditText)findViewById(R.id.edit_place_id);
@@ -51,9 +52,22 @@ public class DiaryActivity extends AppCompatActivity {
         String place = newPlace.getText().toString();
         String entry = newEntry.getText().toString();
 
+        if(TextUtils.isEmpty(date)) {
+            newDate.setError(getString(R.string.editText_errorMessage));
+            return;
+        }
+        if(TextUtils.isEmpty(place)) {
+            newPlace.setError(getString(R.string.editText_errorMessage));
+            return;
+        }
+        if(TextUtils.isEmpty(entry)) {
+            newEntry.setError(getString(R.string.editText_errorMessage));
+            return;
+        }
+
         DiaryMemo diaryMemo = dataSource.createDiaryMemo(date, place, entry);
 
-        return diaryMemo;
+        //return diaryMemo;
     }
 
 
