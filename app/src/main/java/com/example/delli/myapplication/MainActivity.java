@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         diaryDataSource = new DiaryMemoDataSource(this);
 
+
         final Button newEntry = (Button) findViewById(R.id.button_entry);
         newEntry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,13 +177,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
 
+
+
         //Actionbar clicks, automatisches handlen von Clicks (Home/Up-Button
         //-> solange wie parent activity in AndroidManifest.xml spezifiziert
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id==R.id.action_settings){
-
+        if (id==R.id.map_settings){
+            Intent nextIntent = new Intent(MainActivity.this, MapActivity.class);
+            startActivity(nextIntent);
             return true;
         }
 

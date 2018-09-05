@@ -9,10 +9,11 @@
     <string name="edit_place">Ort</string>
     <string name="edit_diary">Heute war ein wunderschöner Tag, da...</string>
     <string name="text_map">KARTE</string>
-    <string name="action_settings">Einträge</string>
+    <string name="action_settings">Tagebuch</string>
     <string name="text_header">TAGEBUCHEINTRAG</string>
     <string name="cab_delete">Einträge löschen</string>
     <string name="editText_errorMessage">Eingabe erforderlich.</string>
     <string name="map_settings">Map</string>
+    <string name="widget_button">Neu</string>
 </resources>
 
