@@ -35,7 +35,6 @@ public class DiaryWidgetProvider extends AppWidgetProvider {
 
             Intent serviceIntent = new Intent(context, DiaryWidgetService.class);
             serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-            //to distinguish between instances (different service-intents):
             serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
 
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.diary_widget_provider);
