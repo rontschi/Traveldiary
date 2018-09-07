@@ -18,21 +18,32 @@
         </activity>
         <activity android:name=".DiaryActivity" />
         <activity android:name=".MapActivity" />
-        <activity android:name=".Diary2Activity">
-        </activity>
+        <activity android:name=".Diary2Activity"></activity>
 
-        <receiver android:name="com.example.delli.myapplication.WidgetProvider"
+        <receiver
+            android:name=".WidgetProvider"
+            android:icon="@drawable/widget_picture"
             android:label="Traveldiary Widget">
-
             <intent-filter>
-                <action android:name="android:appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="android:appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_info"/>
-
+                android:resource="@xml/widget_info" />
         </receiver>
+        <receiver android:name=".DiaryWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/diary_widget_provider_info" />
+        </receiver>
+
+        <service android:name=".DiaryWidgetService"
+            android:permission="android.permission,BIND_REMOTEVIEWS"/>
     </application>
 
 </manifest>
