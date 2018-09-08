@@ -1,6 +1,13 @@
 package com.example.delli.myapplication;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,7 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class DiaryActivity extends AppCompatActivity {
+public class DiaryActivity extends AppCompatActivity implements LocationListener {
 
     public static final String LOG_TAG = DiaryActivity.class.getSimpleName();
     private DiaryMemoDataSource dataSource;
@@ -29,6 +36,28 @@ public class DiaryActivity extends AppCompatActivity {
 
         dataSource = new DiaryMemoDataSource(this);
 
+     /*   final Button coordinatesButton = (Button)findViewById(R.id.button_coordinates);
+        coordinatesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent mapIntent = new Intent(DiaryActivity.this, MapsActivity.class);
+                mapIntent.putExtra("Latitude", lat);
+                mapIntent.putExtra("Longitude", lng);
+                startActivity(mapIntent);
+            }
+        });*/
+
+
+        final Button coordinatesButton = (Button)findViewById(R.id.button_coordinates);
+        coordinatesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getLongitude();
+                getLatitude();
+            }
+        });
 
         final Button newEntry = (Button)findViewById(R.id.button_diary);
         newEntry.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +84,8 @@ public class DiaryActivity extends AppCompatActivity {
         String date = newDate.getText().toString();
         String place = newPlace.getText().toString();
         String entry = newEntry.getText().toString();
+        double longitude = getLongitude();
+        double latitude = getLatitude();
 
         if (isDateValid(date, "dd.mm.yy")){
             newDate.setError("Datum nicht gültig");
@@ -77,11 +108,11 @@ public class DiaryActivity extends AppCompatActivity {
         }
 
 
-        dataSource.createDiaryMemo(date, place, entry);
+        dataSource.createDiaryMemo(date, place, entry, longitude, latitude);
 
         return true;
-
     }
+
 
     public boolean isDateValid(String dateToValidate, String dateFormat){
 
@@ -137,5 +168,56 @@ public class DiaryActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    public double getLongitude(){
+
+        String service = Context.LOCATION_SERVICE;
+        LocationManager locationManger = (LocationManager)
+                getSystemService(service);
+        String provider = LocationManager.GPS_PROVIDER;
+        Location location = locationManger.getLastKnownLocation(provider);
+        double longitude = location.getLongitude();
+        return longitude;
+    }
+
+    public double putLatitude(){
+
+        Location location;
+
+        String service = Context.LOCATION_SERVICE;
+        LocationManager locationManger = (LocationManager)
+                getSystemService(service);
+        String provider = LocationManager.GPS_PROVIDER;
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            location = locationManger
+                    .getLastKnownLocation(provider);
+        }
+        double latitude = location.getLatitude();
+        return latitude;
+    }
+
+
+        @Override
+        public void onLocationChanged (Location location){
+
+        }
+
+        @Override
+        public void onStatusChanged (String provider,int status, Bundle extras){
+
+        }
+
+        @Override
+        public void onProviderEnabled (String provider){
+
+        }
+
+        @Override
+        public void onProviderDisabled (String provider){
+
+        }
 
 }

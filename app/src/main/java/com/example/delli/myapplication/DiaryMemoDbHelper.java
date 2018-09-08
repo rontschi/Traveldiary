@@ -5,9 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-    //= Hilfsklasse -> Erstellen der SQLite-Datenbank
-    //enthält wichtige Konstanten (Tabellennamen,
-    //  Datenbankverison, Namen der Spalte
+//= helper-class
+// function: creates SQLite-database
+// contains important constants (table name, version of database, columns + their names)
 
 public class DiaryMemoDbHelper extends SQLiteOpenHelper{
 
@@ -21,24 +21,25 @@ public class DiaryMemoDbHelper extends SQLiteOpenHelper{
     public static final String COLUMN_DATE = "date";
     public static final String COLUMN_PLACE = "place";
     public static final String COLUMN_ENTRY = "entry";
+    public static final String COLUMN_LONGITUDE = "longitude";
+    public static final String COLUMN_LATITUDE = "latitude";
     public static final String COLUMN_ID = "_id";
 
+    //create database
+    // contains six columns: date, place, entry, longitude, latitude, id
+    // the ids will automaticly increase
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_DIARY_LIST + "(" + COLUMN_DATE +
             " TEXT NOT NULL, " + COLUMN_PLACE + " TEXT NOT NULL, " + COLUMN_ENTRY + " TEXT NOT NULL, "
-            + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT);";
+            + COLUMN_LONGITUDE + COLUMN_LATITUDE + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT);";
 
-
-    //Context = Info über Umgebung, in der Datenbank ausgeführt wird
-    //-> zB. Pfad zur Datenbank
-
+    //environment
     public DiaryMemoDbHelper(Context context){
-        //super(context, "PLATZHALTER_DATENBANKNAME", null, 1);
         super(context, DB_NAME, null, DB_VERSION);
         Log.d(LOG_TAG, "DbHelper hat die Datenbank: " + getDatabaseName() + " erzeugt.");
     }
 
 
-    //Aufruf onCreate() nur falls diese Datenbank noch nicht existiert
+    //retrieving onCreate(), if database does not exist yet
     @Override
     public void onCreate(SQLiteDatabase db) {
         try {

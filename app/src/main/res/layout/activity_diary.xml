@@ -57,11 +57,24 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="60dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
         android:background="#ffa000"
         android:text="@string/text_button_diary"
         android:textColor="@android:color/white"
         android:textSize="17dp" />
+
+    <Button
+        android:id="@+id/button_coordinates"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/edit_date_id"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="40dp"
+        android:background="#ffa000"
+        android:text="@string/button_coordinates"
+        android:textColor="@android:color/white"
+        android:textSize="15dp" />
 
 </RelativeLayout>

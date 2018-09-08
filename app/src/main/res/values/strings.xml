@@ -20,5 +20,6 @@
     <string name="widget_empty">Empty</string>
     <string name="text_widget_item">Item</string>
     <string name="title_activity_maps">Map</string>
+    <string name="button_coordinates">Ort bestimmen</string>
 </resources>
 
