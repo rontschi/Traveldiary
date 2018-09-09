@@ -180,7 +180,7 @@ public class DiaryActivity extends AppCompatActivity implements LocationListener
         return longitude;
     }
 
-    public double putLatitude(){
+    public double getLatitude(){
 
         Location location;
 

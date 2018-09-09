@@ -10,8 +10,8 @@ public class DiaryMemo {
     private final String date;
     private final String place;
     private final String entry;
-    private final double longitude;
-    private final double latitude;
+    private final double lng;
+    private final double lat;
     private final long id;
 
 
@@ -19,8 +19,8 @@ public class DiaryMemo {
         this.date = date;
         this.place = place;
         this.entry = entry;
-        this.longitude = longitude;
-        this.latitude = latitude;
+        this.lng = longitude;
+        this.lat = latitude;
         this.id = id;
     }
 
@@ -36,12 +36,12 @@ public class DiaryMemo {
         return entry;
     }
 
-    public double getLongitude(){
-        return longitude;
+    public double getLng(){
+        return lng;
     }
 
-    public double getLatitude(){
-        return latitude;
+    public double getLat(){
+        return lat;
     }
 
     public long getId(){

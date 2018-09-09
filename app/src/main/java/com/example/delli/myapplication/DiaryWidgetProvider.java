@@ -8,23 +8,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.widget.RemoteViews;
 
-/**
- * Implementation of App Widget functionality.
- */
+    // management of Intents (button)
+    // shows layout on homescreen
+    // update
+
 public class DiaryWidgetProvider extends AppWidgetProvider {
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
 
-        CharSequence widgetText = context.getString(R.string.appwidget_text);
-        // Construct the RemoteViews object
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.diary_widget_provider);
-        //remoteViews.setTextViewText(R.id.appwidget_text, widgetText);
-        remoteViews.addView(R.id.itemListView,remoteViews);
-
-        // Instruct the widget manager to update the widget
-        appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
-    }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -45,6 +35,19 @@ public class DiaryWidgetProvider extends AppWidgetProvider {
             appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
+    }
+
+    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
+                                int appWidgetId) {
+
+        CharSequence widgetText = context.getString(R.string.appwidget_text);
+        // Construct the RemoteViews object
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.diary_widget_provider);
+        //remoteViews.setTextViewText(R.id.appwidget_text, widgetText);
+        remoteViews.addView(R.id.itemListView,remoteViews);
+
+        // Instruct the widget manager to update the widget
+        appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
     }
 
     @Override

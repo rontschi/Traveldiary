@@ -22,7 +22,7 @@ public class DiaryWidgetService extends RemoteViewsService {
 
         DiaryWidgetItemFactory(Context context, Intent intent){
             this.context = context;
-            // appWidgetId --> distinguish between instances
+            // appWidgetId -> distinguish between instances
             this.appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                     AppWidgetManager.INVALID_APPWIDGET_ID);
         }
@@ -41,7 +41,6 @@ public class DiaryWidgetService extends RemoteViewsService {
 
         @Override
         public void onDestroy() {
-
             //close data source
         }
 
@@ -61,7 +60,6 @@ public class DiaryWidgetService extends RemoteViewsService {
 
         @Override
         public RemoteViews getLoadingView() {
-            //when widget is still loading
             return null;
         }
 
@@ -73,14 +71,12 @@ public class DiaryWidgetService extends RemoteViewsService {
 
         @Override
         public long getItemId(int position) {
-            //theoretisch: usefull when identify each object apart from its position
-            //hier nicht:
+
             return position;
         }
 
         @Override
         public boolean hasStableIds() {
-            //true = more efficient
             return true;
         }
     }
