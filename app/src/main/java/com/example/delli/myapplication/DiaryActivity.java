@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,9 +32,14 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class DiaryActivity extends AppCompatActivity implements LocationListener {
 
+    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+    private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+
     public static final String LOG_TAG = DiaryActivity.class.getSimpleName();
     private DiaryMemoDataSource dataSource;
-    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+    private Boolean locationPermissionsGranted = false;
+
 
 
     @Override
@@ -41,27 +49,21 @@ public class DiaryActivity extends AppCompatActivity implements LocationListener
 
         dataSource = new DiaryMemoDataSource(this);
 
-     /*   final Button coordinatesButton = (Button)findViewById(R.id.button_coordinates);
-        coordinatesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                Intent mapIntent = new Intent(DiaryActivity.this, MapsActivity.class);
-                mapIntent.putExtra("Latitude", lat);
-                mapIntent.putExtra("Longitude", lng);
-                startActivity(mapIntent);
-            }
-        });*/
-
 
         final Button coordinatesButton = (Button)findViewById(R.id.button_coordinates);
         coordinatesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isPermissionValid();
+                if (locationPermissionsGranted){
+                    writeCoordinates();
+                } else
+                    Toast.makeText(getApplicationContext(),
+                            "Koordinaten erforderlich", Toast.LENGTH_SHORT).show();
+
             }
         });
+
 
         final Button newEntry = (Button)findViewById(R.id.button_diary);
         newEntry.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +85,7 @@ public class DiaryActivity extends AppCompatActivity implements LocationListener
 
         EditText newDate = (EditText)findViewById(R.id.edit_date_id);
         EditText newPlace = (EditText)findViewById(R.id.edit_place_id);
-        EditText newEntry = (EditText) findViewById(R.id.edit_entry_id);
+        EditText newEntry = (EditText)findViewById(R.id.edit_entry_id);
 
         String date = newDate.getText().toString();
         String place = newPlace.getText().toString();
@@ -112,10 +114,32 @@ public class DiaryActivity extends AppCompatActivity implements LocationListener
         }
 
 
+
+
+
         dataSource.createDiaryMemo(date, place, entry, lng, lat);
 
         return true;
     }
+
+
+    public void writeCoordinates(){
+
+        EditText newCoordinate = (EditText)findViewById(R.id.edit_coordinates_id);
+        newCoordinate.setText(readCoordinates());
+    }
+
+
+    public String readCoordinates(){
+
+        double longitude = getLongitude();
+        double latitude = getLatitude();
+
+        String output = longitude + ", " + latitude;
+        return output;
+
+    }
+
 
 
     public boolean isDateValid(String dateToValidate, String dateFormat){
@@ -212,12 +236,13 @@ public class DiaryActivity extends AppCompatActivity implements LocationListener
     }
 
     public void isPermissionValid (){
-        String[] permissions = {ACCESS_FINE_LOCATION,
-                ACCESS_COARSE_LOCATION};
+        String[] permissions = {FINE_LOCATION, COARSE_LOCATION};
 
-        if (ContextCompat.checkSelfPermission(this.getApplicationContext(), ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            if (ContextCompat.checkSelfPermission(this.getApplicationContext(), ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                boolean locationPermissionsGranted = true;
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(), FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this.getApplicationContext(), COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                locationPermissionsGranted = true;
+                Toast.makeText(getApplicationContext(),
+                        "Standort abgefragt", Toast.LENGTH_SHORT).show();
                 getLatitude();
                 getLongitude();
             } else {
@@ -225,6 +250,21 @@ public class DiaryActivity extends AppCompatActivity implements LocationListener
             }
         } else {
             ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE_ASK_PERMISSIONS);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        locationPermissionsGranted = false;
+
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    locationPermissionsGranted = true;
+                    getLongitude();
+                    getLatitude();
+                }
+            }
         }
     }
 
