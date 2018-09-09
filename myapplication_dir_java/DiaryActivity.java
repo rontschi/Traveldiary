@@ -105,7 +105,7 @@ public class DiaryActivity extends AppCompatActivity {
         //Anzeigen des gespeicherten Eintrags in Liste in MainActivity
     }
 
-    //erbt von MapActivity? -> selbe Methode? andere Möglichkeit?
+    //erbt von MapsActivity? -> selbe Methode? andere Möglichkeit?
     //Wird es zweimal gebraucht oder reicht einmal?
     private void showInMap(){
         //Ort holen und in Map markieren

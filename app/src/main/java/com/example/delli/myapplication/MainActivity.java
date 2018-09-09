@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.view.inputmethod.InputMethodManager;
 import android.text.TextUtils;
 
+import com.google.android.gms.maps.GoogleMap;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -185,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id==R.id.map_settings){
-            Intent nextIntent = new Intent(MainActivity.this, MapActivity.class);
+            Intent nextIntent = new Intent(MainActivity.this, MapsActivity.class);
             startActivity(nextIntent);
             return true;
         }

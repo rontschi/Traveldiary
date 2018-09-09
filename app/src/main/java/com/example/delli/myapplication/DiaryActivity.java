@@ -159,7 +159,7 @@ public class DiaryActivity extends AppCompatActivity implements LocationListener
                 startActivity(backIntent);
                 return true;
             case R.id.map_settings:
-                Intent nextIntent = new Intent(DiaryActivity.this, MapActivity.class);
+                Intent nextIntent = new Intent(DiaryActivity.this, MapsActivity.class);
                 startActivity(nextIntent);
                 return true;
         }
@@ -171,18 +171,26 @@ public class DiaryActivity extends AppCompatActivity implements LocationListener
 
     public double getLongitude(){
 
+
         String service = Context.LOCATION_SERVICE;
         LocationManager locationManger = (LocationManager)
                 getSystemService(service);
         String provider = LocationManager.GPS_PROVIDER;
-        Location location = locationManger.getLastKnownLocation(provider);
-        double longitude = location.getLongitude();
-        return longitude;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            Location location = locationManger
+                    .getLastKnownLocation(provider);
+            double longitude = location.getLongitude();
+            return longitude;
+        }
+        return 0;
+
     }
 
     public double getLatitude(){
 
-        Location location;
+        //Location location;
 
         String service = Context.LOCATION_SERVICE;
         LocationManager locationManger = (LocationManager)
@@ -192,11 +200,12 @@ public class DiaryActivity extends AppCompatActivity implements LocationListener
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            location = locationManger
+            Location location = locationManger
                     .getLastKnownLocation(provider);
+            double latitude = location.getLatitude();
+            return latitude;
         }
-        double latitude = location.getLatitude();
-        return latitude;
+        return 0;
     }
 
 

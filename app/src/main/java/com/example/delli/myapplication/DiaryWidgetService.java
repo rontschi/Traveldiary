@@ -71,7 +71,6 @@ public class DiaryWidgetService extends RemoteViewsService {
 
         @Override
         public long getItemId(int position) {
-
             return position;
         }
 

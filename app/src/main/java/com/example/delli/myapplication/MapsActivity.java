@@ -1,7 +1,9 @@
 package com.example.delli.myapplication;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -42,5 +44,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+
+        //Actionbar clicks, automatisches handlen von Clicks (Home/Up-Button
+        //-> solange wie parent activity in AndroidManifest.xml spezifiziert
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            Intent nextIntent = new Intent(MapsActivity.this, MainActivity.class);
+            startActivity(nextIntent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

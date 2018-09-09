@@ -24,21 +24,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".DiaryActivity" />
-        <activity android:name=".MapActivity" />
         <activity android:name=".Diary2Activity" />
 
-        <receiver
-            android:name=".WidgetProvider"
-            android:icon="@drawable/widget_picture"
-            android:label="Traveldiary Widget">
-            <intent-filter>
-                <action android:name="android:appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_info" />
-        </receiver>
         <receiver android:name=".DiaryWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

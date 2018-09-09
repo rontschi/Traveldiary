@@ -26,7 +26,7 @@ public class MapActivity extends AppCompatActivity {
     }
 
     public void toDiary(){
-        //Intent zwischen Diaryactivity + MapActivity -> bei Antippen von
+        //Intent zwischen Diaryactivity + MapsActivity -> bei Antippen von
         //  Symbol Springen in richtigen Tagebucheintrag
     }
 
