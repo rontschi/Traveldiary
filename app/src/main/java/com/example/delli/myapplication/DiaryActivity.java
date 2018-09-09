@@ -8,6 +8,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -21,6 +22,9 @@ import android.widget.Toast;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 
 public class DiaryActivity extends AppCompatActivity implements LocationListener {
@@ -84,8 +88,8 @@ public class DiaryActivity extends AppCompatActivity implements LocationListener
         String date = newDate.getText().toString();
         String place = newPlace.getText().toString();
         String entry = newEntry.getText().toString();
-        double longitude = getLongitude();
-        double latitude = getLatitude();
+        double lng = getLongitude();
+        double lat = getLatitude();
 
         if (isDateValid(date, "dd.mm.yy")){
             newDate.setError("Datum nicht gültig");
@@ -108,7 +112,7 @@ public class DiaryActivity extends AppCompatActivity implements LocationListener
         }
 
 
-        dataSource.createDiaryMemo(date, place, entry, longitude, latitude);
+        dataSource.createDiaryMemo(date, place, entry, lng, lat);
 
         return true;
     }
@@ -159,7 +163,7 @@ public class DiaryActivity extends AppCompatActivity implements LocationListener
                 startActivity(backIntent);
                 return true;
             case R.id.map_settings:
-                Intent nextIntent = new Intent(DiaryActivity.this, MapsActivity.class);
+                Intent nextIntent = new Intent(DiaryActivity.this, MapActivity.class);
                 startActivity(nextIntent);
                 return true;
         }
@@ -176,16 +180,15 @@ public class DiaryActivity extends AppCompatActivity implements LocationListener
         LocationManager locationManger = (LocationManager)
                 getSystemService(service);
         String provider = LocationManager.GPS_PROVIDER;
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             Location location = locationManger
                     .getLastKnownLocation(provider);
             double longitude = location.getLongitude();
             return longitude;
         }
         return 0;
-
     }
 
     public double getLatitude(){
@@ -197,15 +200,31 @@ public class DiaryActivity extends AppCompatActivity implements LocationListener
                 getSystemService(service);
         String provider = LocationManager.GPS_PROVIDER;
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             Location location = locationManger
                     .getLastKnownLocation(provider);
             double latitude = location.getLatitude();
             return latitude;
         }
         return 0;
+    }
+
+    public void lngPermissions (){
+        String[] permissions = {ACCESS_FINE_LOCATION,
+                ACCESS_COARSE_LOCATION};
+
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(), ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this.getApplicationContext(), ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                boolean locationPermissionsGranted = true;
+                getLatitude();
+            } else {
+                //ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSION_REQUEST_CODE);
+            }
+        } else {
+            //ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSION_REQUEST_CODE);
+        }
     }
 
 

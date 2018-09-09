@@ -43,15 +43,15 @@ public class DiaryMemoDataSource {
 
     // creates DiaryMemo-object
     // insert data sets into the table of tth database
-    public DiaryMemo createDiaryMemo(String date, String place, String entry, double longitude,
-                                     double latitude){
+    public DiaryMemo createDiaryMemo(String date, String place, String entry, double lng,
+                                     double lat){
 
         ContentValues values = new ContentValues();
         values.put(DiaryMemoDbHelper.COLUMN_DATE, date);
         values.put(DiaryMemoDbHelper.COLUMN_PLACE, place);
         values.put(DiaryMemoDbHelper.COLUMN_ENTRY, entry);
-        values.put(DiaryMemoDbHelper.COLUMN_LONGITUDE, longitude);
-        values.put(DiaryMemoDbHelper.COLUMN_LATITUDE, latitude);
+        values.put(DiaryMemoDbHelper.COLUMN_LONGITUDE, lng);
+        values.put(DiaryMemoDbHelper.COLUMN_LATITUDE, lat);
 
         // open the database
         open();
@@ -139,11 +139,11 @@ public class DiaryMemoDataSource {
         String date = cursor.getString(idDate);
         String place = cursor.getString(idPlace);
         String entry = cursor.getString(idEntry);
-        double longitude = cursor.getDouble(idLongitude);
-        double latitude = cursor.getDouble(idLatitude);
+        double lng = cursor.getDouble(idLongitude);
+        double lat = cursor.getDouble(idLatitude);
         long id = cursor.getLong(idIndex);
 
-        DiaryMemo diaryMemo = new DiaryMemo(date, place, entry, longitude, latitude, id);
+        DiaryMemo diaryMemo = new DiaryMemo(date, place, entry, lng, lat, id);
 
         return diaryMemo;
     }

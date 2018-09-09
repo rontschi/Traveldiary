@@ -21,11 +21,14 @@ public class DiaryMemoDbHelper extends SQLiteOpenHelper{
     public static final String COLUMN_DATE = "date";
     public static final String COLUMN_PLACE = "place";
     public static final String COLUMN_ENTRY = "entry";
+    public static final String COLUMN_LONGITUDE = "longitude";
+    public static final String COLUMN_LATITUDE = "latitude";
+
     public static final String COLUMN_ID = "_id";
 
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_DIARY_LIST + "(" + COLUMN_DATE +
             " TEXT NOT NULL, " + COLUMN_PLACE + " TEXT NOT NULL, " + COLUMN_ENTRY + " TEXT NOT NULL, "
-            + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT);";
+            + COLUMN_LONGITUDE + COLUMN_LATITUDE + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT);";
 
 
     //Context = Info über Umgebung, in der Datenbank ausgeführt wird

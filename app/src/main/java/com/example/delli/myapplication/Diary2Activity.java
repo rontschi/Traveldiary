@@ -101,7 +101,7 @@ public class Diary2Activity extends AppCompatActivity {
                 startActivity(backIntent);
                 return true;
             case R.id.map_settings:
-                Intent nextIntent = new Intent(Diary2Activity.this, MapsActivity.class);
+                Intent nextIntent = new Intent(Diary2Activity.this, MapActivity.class);
                 startActivity(nextIntent);
                 return true;
         }

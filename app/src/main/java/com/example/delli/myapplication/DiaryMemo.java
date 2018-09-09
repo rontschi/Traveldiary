@@ -15,12 +15,12 @@ public class DiaryMemo {
     private final long id;
 
 
-    public DiaryMemo(String date, String place, String entry, double longitude, double latitude, long id){
+    public DiaryMemo(String date, String place, String entry, double lng, double lat, long id){
         this.date = date;
         this.place = place;
         this.entry = entry;
-        this.lng = longitude;
-        this.lat = latitude;
+        this.lng = lng;
+        this.lat = lat;
         this.id = id;
     }
 

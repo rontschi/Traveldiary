@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id==R.id.map_settings){
-            Intent nextIntent = new Intent(MainActivity.this, MapsActivity.class);
+            Intent nextIntent = new Intent(MainActivity.this, MapActivity.class);
             startActivity(nextIntent);
             return true;
         }

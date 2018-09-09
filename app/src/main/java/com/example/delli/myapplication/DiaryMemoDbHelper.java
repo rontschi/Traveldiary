@@ -30,7 +30,7 @@ public class DiaryMemoDbHelper extends SQLiteOpenHelper{
     // the ids will automaticly increase
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_DIARY_LIST + "(" + COLUMN_DATE +
             " TEXT NOT NULL, " + COLUMN_PLACE + " TEXT NOT NULL, " + COLUMN_ENTRY + " TEXT NOT NULL, "
-            + COLUMN_LONGITUDE + COLUMN_LATITUDE + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT);";
+            + COLUMN_LONGITUDE + " TEXT NOT NULL, " + COLUMN_LATITUDE + " TEXT NOT NULL, "+ COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT);";
 
     //environment
     public DiaryMemoDbHelper(Context context){

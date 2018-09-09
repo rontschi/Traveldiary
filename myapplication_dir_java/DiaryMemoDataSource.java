@@ -24,11 +24,13 @@ public class DiaryMemoDataSource {
             DiaryMemoDbHelper.COLUMN_DATE,
             DiaryMemoDbHelper.COLUMN_PLACE,
             DiaryMemoDbHelper.COLUMN_ENTRY,
+            DiaryMemoDbHelper.COLUMN_LONGITUDE,
+            DiaryMemoDbHelper.COLUMN_LATITUDE,
             DiaryMemoDbHelper.COLUMN_ID,
     };
 
 
-    public DiaryMemo createDiaryMemo(String date, String place, String entry){
+    public DiaryMemo createDiaryMemo(String date, String place, String entry, double lng, double lat){
 
         ContentValues values = new ContentValues();
         values.put(DiaryMemoDbHelper.COLUMN_DATE, date);
@@ -53,14 +55,18 @@ public class DiaryMemoDataSource {
         int idDate = cursor.getColumnIndex(DiaryMemoDbHelper.COLUMN_DATE);
         int idPlace = cursor.getColumnIndex(DiaryMemoDbHelper.COLUMN_PLACE);
         int idEntry = cursor.getColumnIndex(DiaryMemoDbHelper.COLUMN_ENTRY);
+        int idLongitude = cursor.getColumnIndex(DiaryMemoDbHelper.COLUMN_LONGITUDE)
+        int idLatitude = cursor.getColumnIndex(DiaryMemoDbHelper.COLUMN_LATITUDE)
         int idIndex = cursor.getColumnIndex(DiaryMemoDbHelper.COLUMN_ID);
 
         String date = cursor.getString(idDate);
         String place = cursor.getString(idPlace);
         String entry = cursor.getString(idEntry);
+        double lng = cursor.getDouble(idLongitude);
+        double lat = cursor.getDouble(idLatitude);
         long id = cursor.getLong(idIndex);
 
-        DiaryMemo diaryMemo = new DiaryMemo(date, place, entry);
+        DiaryMemo diaryMemo = new DiaryMemo(date, place, entry, lng, lat);
 
         return diaryMemo;
     }
