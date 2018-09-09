@@ -31,6 +31,7 @@ public class DiaryActivity extends AppCompatActivity implements LocationListener
 
     public static final String LOG_TAG = DiaryActivity.class.getSimpleName();
     private DiaryMemoDataSource dataSource;
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
 
     @Override
@@ -58,8 +59,7 @@ public class DiaryActivity extends AppCompatActivity implements LocationListener
         coordinatesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getLongitude();
-                getLatitude();
+                isPermissionValid();
             }
         });
 
@@ -211,7 +211,7 @@ public class DiaryActivity extends AppCompatActivity implements LocationListener
         return 0;
     }
 
-    public void lngPermissions (){
+    public void isPermissionValid (){
         String[] permissions = {ACCESS_FINE_LOCATION,
                 ACCESS_COARSE_LOCATION};
 
@@ -219,11 +219,12 @@ public class DiaryActivity extends AppCompatActivity implements LocationListener
             if (ContextCompat.checkSelfPermission(this.getApplicationContext(), ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 boolean locationPermissionsGranted = true;
                 getLatitude();
+                getLongitude();
             } else {
-                //ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSION_REQUEST_CODE);
+                ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE_ASK_PERMISSIONS);
             }
         } else {
-            //ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSION_REQUEST_CODE);
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE_ASK_PERMISSIONS);
         }
     }
 
